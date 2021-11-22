@@ -1,22 +1,32 @@
 import Head from 'next/head'
 import Header from '@components/Header'
 import Footer from '@components/Footer'
+import Link from 'next/link'
+import Banner from '@components/Banner'
+import HintForm from '@components/HintForm'
+import { getHintsData } from '../lib/hints'
 
-export default function Home() {
+export async function getStaticProps() {
+  const allHintData = getHintsData()
+  return {
+    props: {
+      allHintData
+    }
+  }
+}
+
+export default function Home({ allHintData }) {
   return (
     <div className="container">
       <Head>
-        <title>Next.js for SSS21!</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title>SSS '21</title>
+        <link rel="icon" href="/SSS.png" />
       </Head>
-
       <main>
-        <Header title="Welcome to my app!" />
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <Banner />
+        <Header title="SSS Scavenger Hunt 2021" />
+        <HintForm data={allHintData}/>
       </main>
-
       <Footer />
     </div>
   )
