@@ -20,7 +20,7 @@ export default function Home({ allHintData }) {
     <div className="container">
       <Head>
         <title>SSS '21</title>
-        <link rel="icon" href="/SSS.png" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <main>
         <Banner />

@@ -27,8 +27,8 @@ export default function HintForm({ data }) {
       <form onSubmit={finishHunt}>
         {data.map(({ id, question, answer }) => (
           <>
-            <input type="text" id={id} pattern={answer} title="wrong answer" required />
             <label htmlFor="question">{question}</label>
+            <input type="text" id={id} pattern={answer} title="wrong answer" required value={answer}/>
             <br/>
             <br/>
           </>
