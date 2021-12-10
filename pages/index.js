@@ -24,7 +24,7 @@ export default function Home({ allHintData }) {
       </Head>
       <main>
         <Banner />
-        <Header title="SSS Scavenger Hunt 2021" />
+        <Header title="Scavenger Hunt" />
         <HintForm data={allHintData}/>
       </main>
       <Footer />
