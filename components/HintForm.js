@@ -14,7 +14,8 @@ export default function HintForm({ data }) {
     let key = event.target[0].id;
     let found = data.some(hintObj => {
       return hintObj.id == event.target[0].id
-        && hintObj.answer.toLowerCase() == event.target[0].value.toLowerCase();
+        && hintObj.answer.toLowerCase().replace(/\s/g,'')
+          == event.target[0].value.toLowerCase().replace(/\s/g,'');
     });
 
     if (found) {
@@ -26,8 +27,9 @@ export default function HintForm({ data }) {
     // All answers are correct
     let allAnswered = true;
     Object.values(ref).forEach((item, i) => {
-      allAnswered &= (item.current.value
-        == data.find(hintObj => hintObj.id == item.current.id).answer);
+      allAnswered &= (item.current.value.toLowerCase().replace(/\s/g,'')
+        == data.find(hintObj => hintObj.id
+          == item.current.id).answer.toLowerCase().replace(/\s/g,''));
     });
 
     if (allAnswered) {
