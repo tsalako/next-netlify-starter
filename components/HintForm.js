@@ -1,35 +1,37 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import React, { useState, useRef, useEffect } from 'react';
 import 'bulma/css/bulma.min.css';
 
 export default function HintForm({ data }) {
-  let hintStates = {};
   let ref = {};
   data.forEach( hintObj => {
-    hintStates[hintObj.id] = 0;
     ref[hintObj.id] = useRef()
   });
 
   const router = useRouter()
-  const reducer = (previousValue, currentValue) => previousValue && currentValue;
   const checkHint = async event => {
     event.preventDefault();
     let key = event.target[0].id;
     let found = data.some(hintObj => {
-      return hintObj.id == event.target[0].id && hintObj.answer.toLowerCase() == event.target[0].value.toLowerCase();
+      return hintObj.id == event.target[0].id
+        && hintObj.answer.toLowerCase() == event.target[0].value.toLowerCase();
     });
 
     if (found) {
-      hintStates[key] = 1;
-      ref[key].current.className = "input is-success";
+      ref[key].current.className = "input is-success right";
     } else {
-      hintStates[key] = -1;
-      ref[key].current.className = "input is-danger";
+      ref[key].current.className = "input is-danger wrong";
     }
 
     // All answers are correct
-    if (Object.values(hintStates).reduce(reducer)) {
-        router.push("/final_hint");
+    let allAnswered = true;
+    Object.values(ref).forEach((item, i) => {
+      allAnswered &= (item.current.value
+        == data.find(hintObj => hintObj.id == item.current.id).answer);
+    });
+
+    if (allAnswered) {
+        router.push("/congrats");
     }
   }
 
