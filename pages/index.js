@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Header from '@components/Header'
 import Footer from '@components/Footer'
 import Link from 'next/link'
 import Banner from '@components/Banner'
@@ -24,7 +23,6 @@ export default function Home({ allHintData }) {
       </Head>
       <main>
         <Banner />
-        <Header title="Scavenger Hunt" />
         <HintForm data={allHintData}/>
       </main>
       <Footer />
